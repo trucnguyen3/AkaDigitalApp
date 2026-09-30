@@ -15,7 +15,7 @@ export default function SignupScreen({ navigation }) {
       Alert.alert('Lỗi', 'Vui lòng điền đầy đủ các thông tin!');
       return;
     }
-    const res = await signup(fullName, email, mobile, password);
+    const res = await signup({ fullName, email, mobile, password });
     if (!res.success) {
       Alert.alert('Đăng ký thất bại', res.message);
     }
@@ -50,7 +50,7 @@ export default function SignupScreen({ navigation }) {
         placeholderTextColor="#94a3b8"
         value={mobile}
         onChangeText={setMobile}
-        keyboardType="mobile"
+        keyboardType="numeric"
         autoCapitalize="none"
       />
 
