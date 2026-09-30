@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
   // 1. Đăng ký
   const signup = async ({ fullName, email, password, mobile }) => {
     try {
-      const response = await fetch('http://uat1.akadigital.net/api/auth/signup', {
+      const response = await fetch('https://uat1.akadigital.net/api/auth/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ fullName, email, password, mobile }),
@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
   // 2. Đăng nhập
   const login = async (email, password) => {
     try {
-      const response = await fetch('http://uat1.akadigital.net/api/auth/login', {
+      const response = await fetch('https://uat1.akadigital.net/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -85,7 +85,7 @@ export const AuthProvider = ({ children }) => {
   // 4. Xóa tài khoản
   const deleteAccount = async () => {
     try {
-      const response = await fetch('http://uat1.akadigital.net/api/auth/delete-account', {
+      const response = await fetch('https://uat1.akadigital.net/api/auth/delete-account', {
         method: 'DELETE',
         headers: { 
           'Content-Type': 'application/json',
