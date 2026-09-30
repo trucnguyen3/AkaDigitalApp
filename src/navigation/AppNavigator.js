@@ -8,6 +8,7 @@ import { AuthContext } from '../context/AuthContext';
 import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
 import HomeScreen from '../screens/HomeScreen';
+import ProductsScreen from '../screens/ProductsScreen'; // Import màn hình vừa tạo
 import ProfileScreen from '../screens/ProfileScreen';
 import { colors } from '../styles/theme';
 
@@ -27,7 +28,12 @@ function MainTabNavigator() {
       <Tab.Screen
         name="Home"
         component={HomeScreen}
-        options={{ title: 'AKA Digital', headerTitle: 'Trang Chủ AKA Digital' }}
+        options={{ title: 'Trang Chủ', headerTitle: 'AKA Digital' }}
+      />
+      <Tab.Screen
+        name="Products"
+        component={ProductsScreen}
+        options={{ title: 'Giải Pháp', headerTitle: 'Giải Pháp & Sản Phẩm MarTech' }}
       />
       <Tab.Screen
         name="Profile"
