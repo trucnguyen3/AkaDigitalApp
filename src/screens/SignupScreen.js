@@ -6,15 +6,16 @@ import { colors } from '../styles/theme';
 export default function SignupScreen({ navigation }) {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
+  const [mobile, setMobile] = useState('');
   const [password, setPassword] = useState('');
   const { signup } = useContext(AuthContext);
 
   const handleSignup = async () => {
-    if (!fullName || !email || !password) {
+    if (!email || !password) {
       Alert.alert('Lỗi', 'Vui lòng điền đầy đủ các thông tin!');
       return;
     }
-    const res = await signup(fullName, email, password);
+    const res = await signup(fullName, email, mobile, password);
     if (!res.success) {
       Alert.alert('Đăng ký thất bại', res.message);
     }
@@ -40,6 +41,16 @@ export default function SignupScreen({ navigation }) {
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
+        autoCapitalize="none"
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Mobile"
+        placeholderTextColor="#94a3b8"
+        value={mobile}
+        onChangeText={setMobile}
+        keyboardType="mobile"
         autoCapitalize="none"
       />
 
