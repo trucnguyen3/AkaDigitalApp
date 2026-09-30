@@ -21,24 +21,26 @@ function MainTabNavigator() {
       screenOptions={{
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.gray,
-        headerStyle: { backgroundColor: colors.primary },
-        headerTintColor: colors.white,
+        tabBarStyle: { backgroundColor: colors.cardBg, borderTopColor: colors.lightGray },
+        headerStyle: { backgroundColor: colors.cardBg },
+        headerTintColor: colors.primary,
+        headerTitleStyle: { fontWeight: 'bold' },
       }}
     >
       <Tab.Screen
         name="Home"
         component={HomeScreen}
-        options={{ title: 'Trang Chủ', headerTitle: 'AKA Digital' }}
+        options={{ title: 'Trang Chủ', headerTitle: 'AKA DIGITAL' }}
       />
       <Tab.Screen
         name="Products"
         component={ProductsScreen}
-        options={{ title: 'Giải Pháp', headerTitle: 'Giải Pháp & Sản Phẩm MarTech' }}
+        options={{ title: 'Giải Pháp', headerTitle: 'GIẢI PHÁP MARTECH' }}
       />
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}
-        options={{ title: 'Tài Khoản', headerTitle: 'Quản Lý Tài Khoản' }}
+        options={{ title: 'Tài Khoản', headerTitle: 'TÀI KHOẢN' }}
       />
     </Tab.Navigator>
   );

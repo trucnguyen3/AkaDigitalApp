@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, StatusBar } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import { colors } from '../styles/theme';
 
@@ -25,6 +25,7 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="light-content" />
       <Text style={styles.brandTitle}>AKA DIGITAL</Text>
       <Text style={styles.subtitle}>Chuyển đổi số & Giải pháp MarTech</Text>
 
@@ -33,7 +34,7 @@ export default function LoginScreen({ navigation }) {
       <TextInput
         style={styles.input}
         placeholder="Email"
-        placeholderTextColor="#94a3b8"
+        placeholderTextColor={colors.gray}
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
@@ -43,7 +44,7 @@ export default function LoginScreen({ navigation }) {
       <TextInput
         style={styles.input}
         placeholder="Mật khẩu"
-        placeholderTextColor="#94a3b8"
+        placeholderTextColor={colors.gray}
         secureTextEntry
         value={password}
         onChangeText={setPassword}
@@ -68,14 +69,14 @@ export default function LoginScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 24, justifyContent: 'center', backgroundColor: colors.background },
-  brandTitle: { fontSize: 32, fontWeight: '900', color: colors.primary, textAlign: 'center' },
-  subtitle: { fontSize: 14, color: colors.gray, textAlign: 'center', marginBottom: 32 },
-  title: { fontSize: 22, fontWeight: 'bold', color: colors.dark, marginBottom: 16 },
-  input: { backgroundColor: colors.white, padding: 14, borderRadius: 10, borderWidth: 1, borderColor: colors.lightGray, marginBottom: 12, color: colors.dark },
+  brandTitle: { fontSize: 34, fontWeight: '900', color: colors.primary, textAlign: 'center', letterSpacing: 1.5 },
+  subtitle: { fontSize: 13, color: colors.gray, textAlign: 'center', marginBottom: 36, marginTop: 4 },
+  title: { fontSize: 20, fontWeight: 'bold', color: colors.textLight, marginBottom: 16 },
+  input: { backgroundColor: colors.cardBg, padding: 15, borderRadius: 10, borderWidth: 1, borderColor: colors.lightGray, marginBottom: 12, color: colors.textLight },
   btnPrimary: { backgroundColor: colors.primary, padding: 16, borderRadius: 10, alignItems: 'center', marginTop: 8 },
-  btnText: { color: colors.white, fontWeight: 'bold', fontSize: 16 },
-  btnSecondary: { backgroundColor: colors.white, borderWidth: 1, borderColor: colors.primary, padding: 14, borderRadius: 10, alignItems: 'center', marginTop: 10 },
+  btnText: { color: colors.dark, fontWeight: 'bold', fontSize: 16 },
+  btnSecondary: { backgroundColor: 'transparent', borderWidth: 1, borderColor: colors.primary, padding: 14, borderRadius: 10, alignItems: 'center', marginTop: 12 },
   btnSecondaryText: { color: colors.primary, fontWeight: '600' },
-  linkBtn: { marginTop: 20, alignItems: 'center' },
+  linkBtn: { marginTop: 24, alignItems: 'center' },
   linkText: { color: colors.gray },
 });

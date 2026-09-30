@@ -1,11 +1,14 @@
 export const colors = {
-  primary: '#502bd8',
-  secondary: '#3b82f6',
-  dark: '#0f172a',
-  background: '#f8fafc',
-  white: '#ffffff',
-  gray: '#64748b',
-  lightGray: '#e2e8f0',
-  danger: '#ef4444',
-  success: '#10b981',
+  primary: '#f2c202',        // Vàng logo AKA Digital (Amber/Golden)
+  primaryDark: '#D97706',    // Vàng đậm cho trạng thái hover/pressed
+  primaryLight: '#FEF3C7',   // Vàng nhạt cho nền badge, highlight
+  dark: '#0F172A',           // Đen xám chì cao cấp
+  cardBg: '#1E293B',         // Nền card tối
+  background: '#090D16',     // Nền ứng dụng chính (Dark mode)
+  white: '#FFFFFF',
+  textLight: '#F8FAFC',
+  gray: '#94A3B8',
+  lightGray: '#334155',
+  danger: '#EF4444',
+  success: '#10B981',
 };

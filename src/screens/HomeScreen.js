@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, StatusBar } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import { colors } from '../styles/theme';
 
@@ -15,6 +15,8 @@ export default function HomeScreen() {
 
   return (
     <ScrollView style={styles.container}>
+      <StatusBar barStyle="light-content" />
+      {/* Banner */}
       <View style={styles.headerBanner}>
         <Text style={styles.welcomeText}>Xin chào, {user?.fullName || 'Khách hàng'} 👋</Text>
         <Text style={styles.heroTitle}>AKA DIGITAL</Text>
@@ -23,6 +25,7 @@ export default function HomeScreen() {
         </Text>
       </View>
 
+      {/* Giới thiệu */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Về AKA Digital</Text>
         <Text style={styles.bodyText}>
@@ -30,6 +33,7 @@ export default function HomeScreen() {
         </Text>
       </View>
 
+      {/* Dịch vụ */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Giải Pháp Cốt Lõi</Text>
         {services.map((item, index) => (
@@ -40,6 +44,7 @@ export default function HomeScreen() {
         ))}
       </View>
 
+      {/* Thống kê */}
       <View style={styles.statsContainer}>
         <View style={styles.statBox}>
           <Text style={styles.statNum}>100+</Text>
@@ -51,7 +56,7 @@ export default function HomeScreen() {
         </View>
         <View style={styles.statBox}>
           <Text style={styles.statNum}>98%</Text>
-          <Text style={styles.statLabel}>Khách hàng hài lòng</Text>
+          <Text style={styles.statLabel}>Hài lòng</Text>
         </View>
       </View>
       <View style={{ height: 40 }} />
@@ -61,18 +66,18 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.background },
-  headerBanner: { backgroundColor: colors.primary, padding: 24, borderBottomLeftRadius: 20, borderBottomRightRadius: 20 },
-  welcomeText: { color: '#c7d2fe', fontSize: 14, marginBottom: 8 },
-  heroTitle: { color: colors.white, fontSize: 28, fontWeight: '900' },
-  heroSubtitle: { color: '#e0e7ff', fontSize: 14, marginTop: 6, lineHeight: 20 },
+  headerBanner: { backgroundColor: colors.cardBg, padding: 24, borderBottomWidth: 2, borderBottomColor: colors.primary },
+  welcomeText: { color: colors.gray, fontSize: 13, marginBottom: 4 },
+  heroTitle: { color: colors.primary, fontSize: 30, fontWeight: '900', letterSpacing: 1 },
+  heroSubtitle: { color: colors.textLight, fontSize: 13, marginTop: 6, lineHeight: 20 },
   section: { padding: 20 },
-  sectionTitle: { fontSize: 20, fontWeight: 'bold', color: colors.dark, marginBottom: 12 },
+  sectionTitle: { fontSize: 18, fontWeight: 'bold', color: colors.primary, marginBottom: 12 },
   bodyText: { fontSize: 14, color: colors.gray, lineHeight: 22 },
-  card: { backgroundColor: colors.white, padding: 16, borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: colors.lightGray },
-  cardTitle: { fontSize: 16, fontWeight: 'bold', color: colors.primary, marginBottom: 4 },
+  card: { backgroundColor: colors.cardBg, padding: 16, borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: colors.lightGray },
+  cardTitle: { fontSize: 15, fontWeight: 'bold', color: colors.primary, marginBottom: 4 },
   cardDesc: { fontSize: 13, color: colors.gray, lineHeight: 18 },
-  statsContainer: { flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 20, marginTop: 10 },
-  statBox: { flex: 1, backgroundColor: colors.white, padding: 16, borderRadius: 12, alignItems: 'center', marginHorizontal: 4, borderWidth: 1, borderColor: colors.lightGray },
-  statNum: { fontSize: 18, fontWeight: 'bold', color: colors.primary },
+  statsContainer: { flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 20 },
+  statBox: { flex: 1, backgroundColor: colors.cardBg, padding: 16, borderRadius: 12, alignItems: 'center', marginHorizontal: 4, borderWidth: 1, borderColor: colors.primary + '40' },
+  statNum: { fontSize: 20, fontWeight: 'bold', color: colors.primary },
   statLabel: { fontSize: 11, color: colors.gray, textAlign: 'center', marginTop: 4 },
 });
