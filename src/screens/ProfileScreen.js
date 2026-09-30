@@ -16,7 +16,7 @@ export default function ProfileScreen() {
   const handleDeleteAccount = () => {
     Alert.alert(
       'Xóa Tài Khoản',
-      'Hành động này không thể hoàn tác. Tất cả dữ liệu của bạn sẽ bị xóa vĩnh viễn!',
+      'Hành động này sẽ xóa vĩnh viễn dữ liệu tài khoản của bạn khỏi hệ thống và không thể hoàn tác. Bạn có chắc chắn không?',
       [
         { text: 'Hủy', style: 'cancel' },
         {
@@ -24,7 +24,9 @@ export default function ProfileScreen() {
           style: 'destructive',
           onPress: async () => {
             const res = await deleteAccount();
-            if (res && !res.success) {
+            if (res.success) {
+              Alert.alert('Thành công', 'Tài khoản của bạn đã bị xóa.');
+            } else {
               Alert.alert('Lỗi', res.message);
             }
           },

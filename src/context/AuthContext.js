@@ -25,56 +25,50 @@ export const AuthProvider = ({ children }) => {
   };
 
   // 1. Đăng ký
-  const signup = async (fullName, email, password) => {
+  const signup = async ({ fullName, email, password, mobile }) => {
     try {
-      const usersData = await AsyncStorage.getItem('registeredUsers');
-      let users = usersData ? JSON.parse(usersData) : [];
+      const response = await fetch('http://uat1.akadigital.net/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fullName, email, password, mobile }),
+      });
 
-      const existingUser = users.find(
-        (u) => u.email.toLowerCase() === email.toLowerCase()
-      );
-      if (existingUser) {
-        return { success: false, message: 'Email này đã được đăng ký!' };
+      const result = await response.json();
+
+      if (response.ok && result.status === 'success') {
+        // Dữ liệu user trả về đã có fullName, email, mobile
+        await AsyncStorage.setItem('currentUser', JSON.stringify(result.data));
+        setUser(result.data);
+        return { success: true };
+      } else {
+        return { success: false, message: result.message || 'Đăng ký thất bại' };
       }
-
-      const newUser = { fullName, email, password };
-      users.push(newUser);
-
-      await AsyncStorage.setItem('registeredUsers', JSON.stringify(users));
-      await AsyncStorage.setItem('currentUser', JSON.stringify(newUser));
-      setUser(newUser);
-      return { success: true };
-    } catch (e) {
-      return { success: false, message: 'Đã xảy ra lỗi khi đăng ký.' };
+    } catch (error) {
+      return { success: false, message: 'Không thể kết nối đến máy chủ.' };
     }
   };
 
   // 2. Đăng nhập
   const login = async (email, password) => {
     try {
-      if (email === 'demo@akadigital.net' && password === '123456') {
-        const demoUser = { fullName: 'Demo User', email: 'demo@akadigital.net' };
-        await AsyncStorage.setItem('currentUser', JSON.stringify(demoUser));
-        setUser(demoUser);
-        return { success: true };
-      }
+      const response = await fetch('http://uat1.akadigital.net/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
 
-      const usersData = await AsyncStorage.getItem('registeredUsers');
-      let users = usersData ? JSON.parse(usersData) : [];
+      const result = await response.json();
 
-      const foundUser = users.find(
-        (u) => u.email.toLowerCase() === email.toLowerCase() && u.password === password
-      );
-
-      if (foundUser) {
-        await AsyncStorage.setItem('currentUser', JSON.stringify(foundUser));
-        setUser(foundUser);
+      if (response.ok && result.status === 'success') {
+        // result.data bây giờ đã có đầy đủ: { id, fullName, email, mobile }
+        await AsyncStorage.setItem('currentUser', JSON.stringify(result.data));
+        setUser(result.data); 
         return { success: true };
       } else {
-        return { success: false, message: 'Email hoặc mật khẩu không chính xác.' };
+        return { success: false, message: result.message || 'Đăng nhập thất bại' };
       }
-    } catch (e) {
-      return { success: false, message: 'Đã xảy ra lỗi khi đăng nhập.' };
+    } catch (error) {
+      return { success: false, message: 'Lỗi kết nối máy chủ' };
     }
   };
 
@@ -91,19 +85,27 @@ export const AuthProvider = ({ children }) => {
   // 4. Xóa tài khoản
   const deleteAccount = async () => {
     try {
-      if (!user) return;
-      const usersData = await AsyncStorage.getItem('registeredUsers');
-      let users = usersData ? JSON.parse(usersData) : [];
+      const response = await fetch('http://uat1.akadigital.net/api/auth/delete-account', {
+        method: 'DELETE',
+        headers: { 
+          'Content-Type': 'application/json',
+          // Nếu dùng Cookie Session trong React Native, nhớ truyền credentials: 'include'
+        },
+      });
 
-      const updatedUsers = users.filter(
-        (u) => u.email.toLowerCase() !== user.email.toLowerCase()
-      );
-      await AsyncStorage.setItem('registeredUsers', JSON.stringify(updatedUsers));
-      await AsyncStorage.removeItem('currentUser');
-      setUser(null);
-      return { success: true };
-    } catch (e) {
-      return { success: false, message: 'Không thể xóa tài khoản lúc này.' };
+      const result = await response.json();
+
+      if (response.ok && result.status === 'success') {
+        // Xóa thông tin user cục bộ
+        await AsyncStorage.removeItem('currentUser');
+        setUser(null);
+        return { success: true, message: result.message };
+      } else {
+        return { success: false, message: result.message || 'Không thể xóa tài khoản lúc này.' };
+      }
+    } catch (error) {
+      console.error('❌ Delete Account Client Error:', error);
+      return { success: false, message: 'Không thể kết nối đến máy chủ.' };
     }
   };
 

@@ -67,7 +67,7 @@ export default function SignupScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 24, justifyContent: 'center', backgroundColor: colors.background },
-  title: { fontSize: 24, fontWeight: 'bold', color: colors.dark, marginBottom: 8 },
+  title: { fontSize: 24, fontWeight: 'bold', color: colors.white, marginBottom: 8 },
   subtitle: { fontSize: 14, color: colors.gray, marginBottom: 24 },
   input: { backgroundColor: colors.white, padding: 14, borderRadius: 10, borderWidth: 1, borderColor: colors.lightGray, marginBottom: 12, color: colors.dark },
   btnPrimary: { backgroundColor: colors.primary, padding: 16, borderRadius: 10, alignItems: 'center', marginTop: 8 },
