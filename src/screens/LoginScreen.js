@@ -7,6 +7,7 @@ export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -20,7 +21,15 @@ export default function LoginScreen({ navigation }) {
   };
 
   const handleDemoLogin = async () => {
-    await login('demo@akadigital.net', '123456');
+    try {
+      setLoading(true);
+      await login('demo@akadigital.net', '123456');
+    } catch (error) {
+      console.error('Đăng nhập demo thất bại:', error);
+      // Bạn có thể hiển thị thông báo lỗi (toast/alert) ở đây nếu cần
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
