@@ -7,7 +7,6 @@ export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useContext(AuthContext);
-  const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -21,23 +20,7 @@ export default function LoginScreen({ navigation }) {
   };
 
   const handleDemoLogin = async () => {
-    console.log('>>> Bắt đầu gửi login demo');
-    try {
-      setLoading(true);
-      
-      // Thử 1 trong 2 dạng tham số tùy vào hàm login trong project của bạn:
-      // Dạng 1: 2 tham số riêng biệt
-      await login('demo@akadigital.net', '123456'); 
-      
-      // Dạng 2: Object (nếu AuthContext của bạn viết nhận object)
-      // await login({ email: 'demo@akadigital.net', password: '123456' });
-
-      console.log('>>> Login thành công');
-    } catch (error) {
-      console.error('>>> Lỗi Login:', error);
-    } finally {
-      setLoading(false);
-    }
+    await login({ email: 'demo@akadigital.net', password: '123456' });
   };
 
   return (
