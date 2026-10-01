@@ -21,12 +21,20 @@ export default function LoginScreen({ navigation }) {
   };
 
   const handleDemoLogin = async () => {
+    console.log('>>> Bắt đầu gửi login demo');
     try {
       setLoading(true);
-      await login('demo@akadigital.net', '123456');
+      
+      // Thử 1 trong 2 dạng tham số tùy vào hàm login trong project của bạn:
+      // Dạng 1: 2 tham số riêng biệt
+      await login('demo@akadigital.net', '123456'); 
+      
+      // Dạng 2: Object (nếu AuthContext của bạn viết nhận object)
+      // await login({ email: 'demo@akadigital.net', password: '123456' });
+
+      console.log('>>> Login thành công');
     } catch (error) {
-      console.error('Đăng nhập demo thất bại:', error);
-      // Bạn có thể hiển thị thông báo lỗi (toast/alert) ở đây nếu cần
+      console.error('>>> Lỗi Login:', error);
     } finally {
       setLoading(false);
     }
