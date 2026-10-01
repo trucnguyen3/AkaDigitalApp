@@ -20,7 +20,10 @@ export default function LoginScreen({ navigation }) {
   };
 
   const handleDemoLogin = async () => {
-    await login({ email: 'demo@akadigital.net', password: '123456' });
+    const res = await login("demo@akadigital.net", "123456");
+    if (!res.success) {
+      Alert.alert('Đăng nhập thất bại', res.message);
+    }
   };
 
   return (
